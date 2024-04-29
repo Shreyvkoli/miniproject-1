@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="../css/style.css" />
+<title>{{first_name}}'s Dashboard</title>
+<section class="main ">
+  <div class="fest text">
+    <div class="card glass">
+      <div class="flex items-center justify-center">
+        <img src="{{ url_for('static', filename='../css/Irislogo.jpg') }}" class="h-16 w-16 rounded-full mt-2">
+      </div>
+      <h3>IRIS</h3>
+      <p>Cultural Fest of SFIT</p>
+      <button class="bg-[#2563eb] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
+        Started</button>
+    </div>
+    <div class="card glass">
+      <div class="flex items-center justify-center">
+        <img src="{{ url_for('static', filename='../css/Mosaic Logo.jpg') }}" class="h-16 w-16 rounded-full mt-2">
+      </div>
+      <h3>Mosaic</h3>
+      <p>Technical Fest of SFIT</p>
+      <button class="bg-[#2563eb] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
+        Started</button>
+    </div>
+    <div class="card glass">
+      <div class="flex items-center justify-center">
+        <img src="{{ url_for('static', filename='../css/Ignitra Logo.jpg') }}" class="h-16 w-16 rounded-full mt-2">
+      </div>
+      <h3>Ignitra</h3>
+      <p>Sport Fest of SFIT</p>
+      <button class="bg-[#2563eb] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
+        Started</button>
+    </div>
+  </div>
+
+  <section class="main-event">
+
+    <div class="event-box glass">
+      <ul>
+        <li id="in-progress-tab" class="active">In progress</li>
+        <li id="completed-tab">Completed</li>
+      </ul>
+      <div id="in-progress-events" class="event">
+        {% for event in in_progress_events %}
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front rounded-2xl">
+              <img class="rounded-2xl" src="{{ url_for('static', filename='images/' + event.image_file) }}"
+                alt="Event image" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back rounded-2xl text-center px-2 text-white relative">
+              <img class="rounded-2xl absolute top-0 left-0 w-full h-full"
+                src="{{ url_for('static', filename='images/' + event.image_file) }}" alt="Event image">
+              <div class="bg-white/20 backdrop-blur-xl absolute top-0 left-0 w-full h-full rounded-2xl ">
+                <h1 class="text-2xl font-bold mt-4 ">{{ event.event_name }}</h1>
+                <p class="mt-2.5  ">{{ event.event_datetime }}</p>
+                <p class="mt-2.5 ">Organized By {{ event.committee}}</p>
+                <p class="mt-2.5 ">Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{%
+                  endif %}</p>
+                <a href="{{ url_for('festpage', event_name=event.event_name) }}">
+                  <button class="py-2 px-5 mt-4 bg-blue-600 rounded-xl text-white hover:scale-110 duration-300">View
+                    Details</button>
+                </a>
+                <button class="py-2 px-7 mt-4 bg-blue-600 rounded-xl text-white hover:scale-110 duration-300">Buy
+                  Ticket</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div id="completed-events" class="event">
+        {% for event in completed_events %}
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front rounded-2xl">
+              <img class="rounded-2xl" src="{{ url_for('static', filename='images/' + event.image_file)  }}"
+                alt="Event image" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back glass rounded-2xl px-2">
+              <h1 class="text-2xl text-center font-extrabold mt-4">{{ event.event_name }}</h1>
+              <p>{{ event.event_datetime }}</p>
+              <p>Organized By {{ event.committee}}</p>
+              <p>Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{% endif %}</p>
+              <a href="{{ url_for('festpage', event_name=event.event_name) }}">
+                <button class="py-2 px-5 bg-blue-600 rounded-xl hover:scale-110 duration-300">View Details</button>
+              </a>
+              <button class="py-2 px-5 bg-blue-600 rounded-xl hover:scale-110 duration-300">Closed</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+  </section>
+
+
+  <script>
+    window.onload = function () {
+      document.getElementById('completed-events').style.display = 'none';
+    };
+    var tabs = document.querySelectorAll('li');
+
+    // Function to remove the 'active' class from all tabs
+    function removeActiveClass() {
+      tabs.forEach(function (tab) {
+        tab.classList.remove('active');
+      });
+    }
+
+    // Function to hide all event divs
+    function hideAllEventDivs() {
+      var eventDivs = document.querySelectorAll('.event');
+      eventDivs.forEach(function (div) {
+        div.style.display = 'none';
+      });
+    }
+    document.getElementById('in-progress-tab').addEventListener('click', function () {
+      removeActiveClass();
+      this.classList.add('active');
+      hideAllEventDivs();
+      var inProgressEventsDiv = document.getElementById('in-progress-events');
+      var displayStyle = window.getComputedStyle(inProgressEventsDiv).display;
+      if (displayStyle === 'none') {
+        inProgressEventsDiv.style.display = 'flex';
+        inProgressEventsDiv.style.flexDirection = 'row';
+      }
+    });
+
+    document.getElementById('completed-tab').addEventListener('click', function () {
+      removeActiveClass();
+      this.classList.add('active');
+      hideAllEventDivs();
+      var completedEventsDiv = document.getElementById('completed-events');
+      var displayStyle = window.getComputedStyle(completedEventsDiv).display;
+      if (displayStyle === 'none') {
+        completedEventsDiv.style.display = 'flex';
+        completedEventsDiv.style.flexDirection = 'row';
+      }
+    });
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.classList.add('flipped');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('flipped');
+      });
+    });
+  </script>
+  {% endblock %}
