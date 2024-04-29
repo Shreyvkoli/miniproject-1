@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #dfe9f5;
+}
+
+.container {
+  display: flex;
+}
+
+.logo {
+  text-align: center;
+  display: flex;
+  margin: 10px 0 0 10px;
+}
+
+.logo img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.logo span {
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+
+.logout {
+  position: absolute;
+  bottom: 0;
+}
+
+/* Main Section */
+.main {
+  position: absolute;
+  padding: 20px;
+  width: 75%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-36%, -53%);
+}
+
+.main-top {
+  display: flex;
+  width: 100%;
+}
+
+.main-top i {
+  position: absolute;
+  right: 0;
+  margin: 10px 30px;
+  color: rgb(110, 109, 109);
+  cursor: pointer;
+}
+
+.fest {
+  display: flex;
+  margin-top: 20px;
+}
+
+.fest .card {
+  width: 25%;
+  margin: 10px;
+  color: white;
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.fest .card h3 {
+  margin: 10px;
+  text-transform: capitalize;
+}
+
+.fest .card p {
+  font-size: 12px;
+}
+
+
+.fest .card i {
+  font-size: 22px;
+  padding: 10px;
+}
+
+/* Event */
+
+.event-box {
+  width: 100%;
+  height: 400px;
+  padding: 10px 10px 20px 20px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.event-box ul {
+  list-style: none;
+  display: flex;
+}
+
+.event-box ul li {
+  margin: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.event-box ul .active {
+  background-color: #2563eb;
+  /* Equivalent to bg-[#002D74] in Tailwind */
+  color: white;
+  /* Equivalent to text-white in Tailwind */
+  padding: 0.5rem 1rem;
+  /* Equivalent to py-2 px-4 in Tailwind */
+  border-radius: 1.5rem;
+  /* Equivalent to rounded-xl in Tailwind */
+  transition: transform 0.3s;
+  /* Equivalent to duration-300 in Tailwind */
+}
+
+.event-box ul .active:hover {
+  transform: scale(1.05);
+  /* Equivalent to hover:scale-105 in Tailwind */
+}
+
+.event-box ul li:not(.active) {
+  margin-top: 20px;
+  /* Add a top margin to move the elements down */
+  margin-right: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.event-box .event {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.box {
+  width: 33%;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.box p {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.box button {
+  background: #2563eb;
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 10px;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+
+.box button:hover {
+  background: #2563eb;
+  scale: 1.04;
+}
+
+.box i {
+  font-size: 7rem;
+  float: right;
+  margin: -20px 20px 20px 0;
+}
+
+.html {
+  color: rgb(25, 94, 54);
+}
+
+.css {
+  color: rgb(104, 179, 35);
+}
+
+.js {
+  color: rgb(28, 98, 179);
+}
+
+
+.glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+}
+
+
+.flip-card {
+  width: 220px;
+  height: 300px;
+  padding: 10px 0px 0px 10px;
+  perspective: 600px;
+  
+
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
